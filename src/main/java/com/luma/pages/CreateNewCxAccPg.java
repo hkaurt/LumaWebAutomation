@@ -20,7 +20,7 @@ public class CreateNewCxAccPg extends BasePage {
 
 		driver.findElement(firstNameText).sendKeys("Hk");
 		driver.findElement(lastNameText).sendKeys("Kr");
-		driver.findElement(emailText).sendKeys("hkm@gmail.com");
+		driver.findElement(emailText).sendKeys("hkkr@gmail.com");
 		driver.findElement(passwordText).sendKeys("Test@123");
 		driver.findElement(confirmPasswordText).sendKeys("Test@123");
 		driver.findElement(createAnAccountBtn).click();

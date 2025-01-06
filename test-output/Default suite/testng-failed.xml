@@ -3,20 +3,6 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.luma.regressiontests.LoginTest">
-        <methods>
-          <include name="tearDown"/>
-          <include name="verifyLoginTest"/>
-          <include name="launchSite"/>
-        </methods>
-      </class> <!-- com.luma.regressiontests.LoginTest -->
-      <class name="com.luma.regressiontests.LogOutTest">
-        <methods>
-          <include name="tearDown"/>
-          <include name="verifyLogOutTest"/>
-          <include name="launchSite"/>
-        </methods>
-      </class> <!-- com.luma.regressiontests.LogOutTest -->
       <class name="com.luma.loginpagetests.CreateNewCxAccTest">
         <methods>
           <include name="VerifyCreateNewCxAccTest"/>

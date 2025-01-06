@@ -15,7 +15,7 @@ public class LoginPage extends BasePage {
 
 	public void signInWithEmailAndPwd() {
 
-		driver.findElement(emailTxt).sendKeys("hkm@gmail.com");
+		driver.findElement(emailTxt).sendKeys("hkkr@gmail.com");
 		driver.findElement(pwdTxt).sendKeys("Test@123");
 		driver.findElement(signInBtn).click();
 

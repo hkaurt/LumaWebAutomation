@@ -2,31 +2,37 @@ package com.luma.loginpagetests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import com.luma.pages.BasePage;
 import com.luma.pages.CommonPage;
 import com.luma.pages.CreateNewCxAccPg;
-import com.luma.pages.HomePage;
+import com.luma.pages.LogOutPage;
+import com.luma.pages.LoginPage;
 
 public class CreateNewCxAccTest extends BaseTest {
 
-	@Test(priority = 0)
+	@Test
 	public void VerifyCreateNewCxAccTest() {
 
-		HomePage hp = new HomePage(driver);
-		hp.clickCreateAnAccLink();
+		CommonPage commonPg = new CommonPage(driver);
+		commonPg.clickCreateAnAccLink();
 
 		CreateNewCxAccPg createAccpg = new CreateNewCxAccPg(driver);
 		createAccpg.createNewcxAccWithInfo();
 
 		Assert.assertEquals(createAccpg.getPageTitle(), "My Account");
 
-//		CommonPage commonPg = new CommonPage(driver);
-//		Assert.assertEquals(commonPg.getConfMsg(), "Thank you for registering with Main Website Store.");
-//
-//		Assert.assertEquals(commonPg.getUserHeader(), "Welcome, ab ab!");
+		commonPg.clickUserHeaderBtn();
+		commonPg.clickSignOut();
 
-		
+		LogOutPage logOutPg = new LogOutPage(driver);
+		Assert.assertEquals(logOutPg.getSignOutMsg(), "You are signed out");
+
+		commonPg.clickSignInLink();
+
+		LoginPage loginPg = new LoginPage(driver);
+		loginPg.signInWithEmailAndPwd();
+
+		Assert.assertEquals(loginPg.getPageTitle(), "My Account");
+
 	}
 
 }

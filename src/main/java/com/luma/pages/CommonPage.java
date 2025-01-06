@@ -9,25 +9,27 @@ public class CommonPage extends BasePage {
 		super(driver);
 	}
 
-	By accCreationConfMsg = By.xpath("//div[contains(text(),'Thank you for registering']");
-	By userHeader = By.xpath("(//span[contains(text(),'Welcome')])[1]");
-	By signOutLink = By.xpath("(//a[contains(string(),'Sign Out')])[1]");
-	By signOutConfMsg = By.xpath("//span[text()='You are signed out']");
+	private By userHeaderBtn=By.xpath("(//button[@type='button'])[1]");
+	private By signOutLink = By.xpath("(//a[contains(string(),'Sign Out')])[1]");
 
-	public String getConfMsg() {
+	private By createAnAccLink = By.xpath("(//a[text()='Create an Account'])[1]");
+	private By signInLink = By.xpath("(//a[contains(text(), 'Sign In')])[1]");
 
-		return driver.findElement(accCreationConfMsg).getText();
+	public void clickCreateAnAccLink() {
+
+		driver.findElement(createAnAccLink).click();
 
 	}
 
-	public String getUserHeader() {
+	public void clickSignInLink() {
 
-		return driver.findElement(userHeader).getText();
+		driver.findElement(signInLink).click();
+
 	}
 
-	public void clickUserHeader() {
+	public void clickUserHeaderBtn() {
 
-		driver.findElement(userHeader).click();
+		driver.findElement(userHeaderBtn).click();
 
 	}
 
@@ -36,11 +38,5 @@ public class CommonPage extends BasePage {
 		driver.findElement(signOutLink).click();
 
 	}
-
-	public String getSignOutMsg() {
-
-		return driver.findElement(signOutConfMsg).getText();
-
-	}
-
+	
 }

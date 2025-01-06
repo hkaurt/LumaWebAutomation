@@ -5,8 +5,6 @@
 		<classes>
 			<class name="com.luma.loginpagetests.BaseTest" />
 			<class name="com.luma.loginpagetests.CreateNewCxAccTest" />
-			<class name="com.luma.regressiontests.LogOutTest" />
-			<class name="com.luma.regressiontests.LoginTest" />
 		</classes>
 	</test> <!--
 	Test -->

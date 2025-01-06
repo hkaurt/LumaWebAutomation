@@ -20,7 +20,7 @@ public class BaseTest {
 
 	protected WebDriver driver;
 
-	@BeforeTest
+	@BeforeMethod
 	public void launchSite() throws IOException {
 
 		String browser = BaseUtils.getConfigValue("browser");
@@ -52,7 +52,7 @@ public class BaseTest {
 
 	}
 
-	@AfterTest
+	@AfterMethod
 	public void tearDown() {
 
 		driver.quit();
