@@ -20,7 +20,7 @@ public class CreateNewCustomerAccountPage extends CommonPage {
 
 		driver.findElement(firstNameText).sendKeys("Hk");
 		driver.findElement(lastNameText).sendKeys("Kr");
-		driver.findElement(emailText).sendKeys("hkrr@gmail.com");
+		driver.findElement(emailText).sendKeys("hkr@gmail.com");
 		driver.findElement(passwordText).sendKeys("Test@123");
 		driver.findElement(confirmPasswordText).sendKeys("Test@123");
 		driver.findElement(createAnAccountBtn).click();
