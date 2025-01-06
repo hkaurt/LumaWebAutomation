@@ -12,12 +12,12 @@ public class CommonPage extends BasePage {
 	private By userHeaderBtn=By.xpath("(//button[@type='button'])[1]");
 	private By signOutLink = By.xpath("(//a[contains(string(),'Sign Out')])[1]");
 
-	private By createAnAccLink = By.xpath("(//a[text()='Create an Account'])[1]");
+	private By createAnAccountLink = By.xpath("(//a[text()='Create an Account'])[1]");
 	private By signInLink = By.xpath("(//a[contains(text(), 'Sign In')])[1]");
 
-	public void clickCreateAnAccLink() {
+	public void clickCreateAnAccountLink() {
 
-		driver.findElement(createAnAccLink).click();
+		driver.findElement(createAnAccountLink).click();
 
 	}
 
