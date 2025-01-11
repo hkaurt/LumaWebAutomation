@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.luma.loginpagetests.CreateNewCxAccTest">
+      <class name="com.luma.loginpagetests.CreateNewCustomerAccountTest">
         <methods>
-          <include name="VerifyCreateNewCxAccTest"/>
+          <include name="init"/>
           <include name="tearDown"/>
+          <include name="verifySuccessfulCreationOfNewCustomerAccountTest"/>
+          <include name="end"/>
           <include name="launchSite"/>
         </methods>
-      </class> <!-- com.luma.loginpagetests.CreateNewCxAccTest -->
+      </class> <!-- com.luma.loginpagetests.CreateNewCustomerAccountTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
