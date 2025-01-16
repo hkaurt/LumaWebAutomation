@@ -3,15 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.luma.loginpagetests.CreateNewCustomerAccountTest">
+      <class name="com.luma.pagetests.PaginationFunctionalityTest">
         <methods>
+          <include name="verifyPaginationFunctionalityForBagsGearPage"/>
           <include name="init"/>
-          <include name="tearDown"/>
-          <include name="verifySuccessfulCreationOfNewCustomerAccountTest"/>
-          <include name="end"/>
           <include name="launchSite"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.luma.loginpagetests.CreateNewCustomerAccountTest -->
+      </class> <!-- com.luma.pagetests.PaginationFunctionalityTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -3,15 +3,38 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="com.luma.loginpagetests.CreateNewCustomerAccountTest">
+      <class name="com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest">
+        <methods>
+          <include name="verifyItemsAreSuccessfullyAddedDisplayedAndCheckoutInShoppingCart"/>
+          <include name="init"/>
+          <include name="launchSite"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest -->
+      <class name="com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest">
         <methods>
           <include name="init"/>
-          <include name="tearDown"/>
-          <include name="verifySuccessfulCreationOfNewCustomerAccountTest"/>
-          <include name="end"/>
           <include name="launchSite"/>
+          <include name="verifySortByFunctionality"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.luma.loginpagetests.CreateNewCustomerAccountTest -->
+      </class> <!-- com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest -->
+      <class name="com.luma.pagetests.PaginationFunctionalityTest">
+        <methods>
+          <include name="verifyPaginationFunctionalityForBagsGearPage"/>
+          <include name="init"/>
+          <include name="launchSite"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.luma.pagetests.PaginationFunctionalityTest -->
+      <class name="com.luma.pagetests.CreateNewCustomerAccountTest">
+        <methods>
+          <include name="verifySuccessfulCreationOfNewCustomerAccountTest"/>
+          <include name="init"/>
+          <include name="launchSite"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.luma.pagetests.CreateNewCustomerAccountTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

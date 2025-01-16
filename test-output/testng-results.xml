@@ -1,77 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="4" total="6" passed="2" failed="0" skipped="0">
+<testng-results ignored="8" total="12" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-01-11T17:28:01 EST" name="Suite" finished-at="2025-01-11T17:30:13 EST" duration-ms="131305">
+  <suite started-at="2025-01-15T19:18:41 EST" name="Suite" finished-at="2025-01-15T19:21:03 EST" duration-ms="142636">
     <groups>
     </groups>
-    <test started-at="2025-01-11T17:28:01 EST" name="Test" finished-at="2025-01-11T17:30:13 EST" duration-ms="131305">
-      <class name="com.luma.womenpagetests.SortByFunctionalityTest">
-        <test-method is-config="true" signature="launchSite(java.lang.reflect.Method)[pri:0, instance:com.luma.womenpagetests.SortByFunctionalityTest@67d48005]" started-at="2025-01-11T17:28:01 EST" name="launchSite" finished-at="2025-01-11T17:28:13 EST" duration-ms="11799" status="PASS">
+    <test started-at="2025-01-15T19:18:41 EST" name="Test" finished-at="2025-01-15T19:21:03 EST" duration-ms="142636">
+      <class name="com.luma.pagetests.CreateNewCustomerAccountTest">
+        <test-method is-config="true" signature="launchSite(java.lang.reflect.Method)[pri:0, instance:com.luma.pagetests.CreateNewCustomerAccountTest@7b9a4292]" started-at="2025-01-15T19:19:32 EST" name="launchSite" finished-at="2025-01-15T19:19:38 EST" duration-ms="6373" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.luma.womenpagetests.SortByFunctionalityTest.verifySortByFunctionality()]]>
+                <![CDATA[public void com.luma.pagetests.CreateNewCustomerAccountTest.verifySuccessfulCreationOfNewCustomerAccountTest() throws java.lang.InterruptedException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchSite -->
-        <test-method signature="verifySortByFunctionality()[pri:0, instance:com.luma.womenpagetests.SortByFunctionalityTest@67d48005]" started-at="2025-01-11T17:28:13 EST" name="verifySortByFunctionality" finished-at="2025-01-11T17:28:20 EST" duration-ms="7249" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- verifySortByFunctionality -->
-        <test-method is-config="true" signature="end(org.testng.ITestResult)[pri:0, instance:com.luma.womenpagetests.SortByFunctionalityTest@67d48005]" started-at="2025-01-11T17:28:20 EST" name="end" finished-at="2025-01-11T17:28:22 EST" duration-ms="1129" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=verifySortByFunctionality status=SUCCESS method=SortByFunctionalityTest.verifySortByFunctionality()[pri:0, instance:com.luma.womenpagetests.SortByFunctionalityTest@67d48005] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- end -->
-      </class> <!-- com.luma.womenpagetests.SortByFunctionalityTest -->
-      <class name="com.luma.loginpagetests.BaseTest">
-        <test-method is-config="true" signature="init()[pri:0, instance:com.luma.loginpagetests.BaseTest@44ebcd03]" started-at="2025-01-11T17:28:01 EST" name="init" finished-at="2025-01-11T17:28:01 EST" duration-ms="614" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- init -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.luma.loginpagetests.BaseTest@44ebcd03]" started-at="2025-01-11T17:30:13 EST" name="tearDown" finished-at="2025-01-11T17:30:13 EST" duration-ms="800" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- com.luma.loginpagetests.BaseTest -->
-      <class name="com.luma.loginpagetests.CreateNewCustomerAccountTest">
-        <test-method is-config="true" signature="launchSite(java.lang.reflect.Method)[pri:0, instance:com.luma.loginpagetests.CreateNewCustomerAccountTest@9f116cc]" started-at="2025-01-11T17:28:22 EST" name="launchSite" finished-at="2025-01-11T17:28:32 EST" duration-ms="10875" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void com.luma.loginpagetests.CreateNewCustomerAccountTest.verifySuccessfulCreationOfNewCustomerAccountTest() throws java.lang.InterruptedException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- launchSite -->
-        <test-method signature="verifySuccessfulCreationOfNewCustomerAccountTest()[pri:0, instance:com.luma.loginpagetests.CreateNewCustomerAccountTest@9f116cc]" started-at="2025-01-11T17:28:32 EST" name="verifySuccessfulCreationOfNewCustomerAccountTest" finished-at="2025-01-11T17:30:12 EST" duration-ms="99161" status="PASS">
+        <test-method signature="verifySuccessfulCreationOfNewCustomerAccountTest()[pri:0, instance:com.luma.pagetests.CreateNewCustomerAccountTest@7b9a4292]" started-at="2025-01-15T19:19:38 EST" name="verifySuccessfulCreationOfNewCustomerAccountTest" finished-at="2025-01-15T19:20:35 EST" duration-ms="56363" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifySuccessfulCreationOfNewCustomerAccountTest -->
-        <test-method is-config="true" signature="end(org.testng.ITestResult)[pri:0, instance:com.luma.loginpagetests.CreateNewCustomerAccountTest@9f116cc]" started-at="2025-01-11T17:30:12 EST" name="end" finished-at="2025-01-11T17:30:13 EST" duration-ms="1004" status="PASS">
+        <test-method is-config="true" signature="end(org.testng.ITestResult)[pri:0, instance:com.luma.pagetests.CreateNewCustomerAccountTest@7b9a4292]" started-at="2025-01-15T19:20:35 EST" name="end" finished-at="2025-01-15T19:20:36 EST" duration-ms="1500" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifySuccessfulCreationOfNewCustomerAccountTest status=SUCCESS method=CreateNewCustomerAccountTest.verifySuccessfulCreationOfNewCustomerAccountTest()[pri:0, instance:com.luma.loginpagetests.CreateNewCustomerAccountTest@9f116cc] output={null}]]]>
+                <![CDATA[[TestResult name=verifySuccessfulCreationOfNewCustomerAccountTest status=SUCCESS method=CreateNewCustomerAccountTest.verifySuccessfulCreationOfNewCustomerAccountTest()[pri:0, instance:com.luma.pagetests.CreateNewCustomerAccountTest@7b9a4292] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- end -->
-      </class> <!-- com.luma.loginpagetests.CreateNewCustomerAccountTest -->
+      </class> <!-- com.luma.pagetests.CreateNewCustomerAccountTest -->
+      <class name="com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest@359f7cdf]" started-at="2025-01-15T19:18:40 EST" name="init" finished-at="2025-01-15T19:18:41 EST" duration-ms="522" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method is-config="true" signature="launchSite(java.lang.reflect.Method)[pri:0, instance:com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest@359f7cdf]" started-at="2025-01-15T19:18:41 EST" name="launchSite" finished-at="2025-01-15T19:18:49 EST" duration-ms="7994" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest.verifySortByFunctionality()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchSite -->
+        <test-method signature="verifySortByFunctionality()[pri:0, instance:com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest@359f7cdf]" started-at="2025-01-15T19:18:49 EST" name="verifySortByFunctionality" finished-at="2025-01-15T19:18:56 EST" duration-ms="7001" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySortByFunctionality -->
+        <test-method is-config="true" signature="end(org.testng.ITestResult)[pri:0, instance:com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest@359f7cdf]" started-at="2025-01-15T19:18:56 EST" name="end" finished-at="2025-01-15T19:18:56 EST" duration-ms="737" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifySortByFunctionality status=SUCCESS method=HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest.verifySortByFunctionality()[pri:0, instance:com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest@359f7cdf] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- end -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest@359f7cdf]" started-at="2025-01-15T19:21:03 EST" name="tearDown" finished-at="2025-01-15T19:21:04 EST" duration-ms="597" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest -->
+      <class name="com.luma.pagetests.PaginationFunctionalityTest">
+        <test-method is-config="true" signature="launchSite(java.lang.reflect.Method)[pri:0, instance:com.luma.pagetests.PaginationFunctionalityTest@79924b]" started-at="2025-01-15T19:18:56 EST" name="launchSite" finished-at="2025-01-15T19:19:28 EST" duration-ms="31593" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.luma.pagetests.PaginationFunctionalityTest.verifyPaginationFunctionalityForBagsGearPage()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchSite -->
+        <test-method signature="verifyPaginationFunctionalityForBagsGearPage()[pri:0, instance:com.luma.pagetests.PaginationFunctionalityTest@79924b]" started-at="2025-01-15T19:19:28 EST" name="verifyPaginationFunctionalityForBagsGearPage" finished-at="2025-01-15T19:19:32 EST" duration-ms="3667" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPaginationFunctionalityForBagsGearPage -->
+        <test-method is-config="true" signature="end(org.testng.ITestResult)[pri:0, instance:com.luma.pagetests.PaginationFunctionalityTest@79924b]" started-at="2025-01-15T19:19:32 EST" name="end" finished-at="2025-01-15T19:19:32 EST" duration-ms="449" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyPaginationFunctionalityForBagsGearPage status=SUCCESS method=PaginationFunctionalityTest.verifyPaginationFunctionalityForBagsGearPage()[pri:0, instance:com.luma.pagetests.PaginationFunctionalityTest@79924b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- end -->
+      </class> <!-- com.luma.pagetests.PaginationFunctionalityTest -->
+      <class name="com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest">
+        <test-method is-config="true" signature="launchSite(java.lang.reflect.Method)[pri:0, instance:com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest@4cc451f2]" started-at="2025-01-15T19:20:36 EST" name="launchSite" finished-at="2025-01-15T19:20:43 EST" duration-ms="6928" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest.verifyItemsAreSuccessfullyAddedDisplayedAndCheckoutInShoppingCart() throws java.io.IOException,java.lang.InterruptedException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchSite -->
+        <test-method signature="verifyItemsAreSuccessfullyAddedDisplayedAndCheckoutInShoppingCart()[pri:0, instance:com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest@4cc451f2]" started-at="2025-01-15T19:20:43 EST" name="verifyItemsAreSuccessfullyAddedDisplayedAndCheckoutInShoppingCart" finished-at="2025-01-15T19:21:03 EST" duration-ms="19523" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyItemsAreSuccessfullyAddedDisplayedAndCheckoutInShoppingCart -->
+        <test-method is-config="true" signature="end(org.testng.ITestResult)[pri:0, instance:com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest@4cc451f2]" started-at="2025-01-15T19:21:03 EST" name="end" finished-at="2025-01-15T19:21:03 EST" duration-ms="452" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyItemsAreSuccessfullyAddedDisplayedAndCheckoutInShoppingCart status=SUCCESS method=JacketsTopsWomenPageShoppingCartFunctionalityTest.verifyItemsAreSuccessfullyAddedDisplayedAndCheckoutInShoppingCart()[pri:0, instance:com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest@4cc451f2] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- end -->
+      </class> <!-- com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

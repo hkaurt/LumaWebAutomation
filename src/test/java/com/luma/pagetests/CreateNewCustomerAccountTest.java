@@ -1,7 +1,8 @@
-package com.luma.loginpagetests;
+package com.luma.pagetests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import com.luma.pages.CreateNewCustomerAccountPage;
 import com.luma.pages.LoginPage;
 import com.luma.pages.MyAccountPage;
@@ -9,6 +10,11 @@ import com.luma.pages.MyAccountPage;
 import utils.RandomDataGenerator;
 import utils.ReportUtils;
 
+/*
+ * @author Harpreet
+ * TC001
+ * Title: Verify Create New Customer Account functionality
+ */
 public class CreateNewCustomerAccountTest extends BaseTest {
 
 	@Test
@@ -16,11 +22,11 @@ public class CreateNewCustomerAccountTest extends BaseTest {
 
 		// click on Create An Account
 		CreateNewCustomerAccountPage createAccountPage = new CreateNewCustomerAccountPage(driver);
-		createAccountPage.clickCreateAnAccountLink();
+		createAccountPage.goToCreateAnAccountLink();
 
 		// Generate random data
-		String firstName = RandomDataGenerator.generateRandomFirstName();
-		String lastName = RandomDataGenerator.generateRandomLastName();
+		String firstName = RandomDataGenerator.generateRandomName();
+		String lastName = RandomDataGenerator.generateRandomName();
 		String email = RandomDataGenerator.generateRandomEmail();
 		String password = RandomDataGenerator.generateRandomPassword();
 
@@ -38,8 +44,8 @@ public class CreateNewCustomerAccountTest extends BaseTest {
 		// Assert.assertEquals(myAccountpage.getPageHeader(), "My Account");
 
 		// sign out from My Account
-		myAccountpage.clickUserHeaderBtn();
-		myAccountpage.clickSignOut();
+		myAccountpage.goToUserHeadingBtn();
+		myAccountpage.signOut();
 
 		// verify sign out message
 		Assert.assertEquals(myAccountpage.getPageHeader(), "You are signed out");
@@ -49,7 +55,7 @@ public class CreateNewCustomerAccountTest extends BaseTest {
 
 		// click on Sign In
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.clickSignInLink();
+		loginPage.signIn();
 
 		// Sign in with email and password
 		loginPage.signInWithEmailAndPassword(email, password);

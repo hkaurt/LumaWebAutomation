@@ -1,4 +1,4 @@
-package com.luma.loginpagetests;
+package com.luma.pagetests;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
