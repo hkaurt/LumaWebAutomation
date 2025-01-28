@@ -76,7 +76,7 @@ public class BaseTest {
 		}
 
 		driver.quit();
-		ReportUtils.log.info("Browser Closed  ");
+		ReportUtils.log.info("Browser Closed");
 	}
 
 	@AfterSuite
