@@ -1,7 +1,7 @@
 package com.luma.pages;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
@@ -21,26 +21,37 @@ public class CommonPage extends BasePage {
 		super(driver);
 	}
 
-	Actions action = new Actions(driver);
-	JavascriptExecutor js = (JavascriptExecutor) driver;
+	private Actions action = new Actions(driver);
+	private JavascriptExecutor js = (JavascriptExecutor) driver;
+	private Select select;
 
+	private LinkedList<String> addedProductNameList = new LinkedList<>();
+	private LinkedList<String> productNamesInCartList = new LinkedList<>();
+
+	private String addedProductName;
+	private HashMap<String, Integer> addedProductNamesHashMap = new HashMap<>();
+
+	private By createAnAccountLink = By.xpath("(//a[text()='Create an Account'])[1]");
+
+	private By signInLink = By.xpath("(//a[contains(text(), 'Sign In')])[1]");
 	private By userHeadingBtn = By.xpath("(//button[@type='button'])[1]");
 	private By signOutLink = By.xpath("(//a[contains(string(),'Sign Out')])[1]");
 
-	private By createAnAccountLink = By.xpath("(//a[text()='Create an Account'])[1]");
-	private By signInLink = By.xpath("(//a[contains(text(), 'Sign In')])[1]");
+	private By sortByMenu = By.id("sorter");
 
-	private By gridView = By.xpath("(//div[@class='modes']//strong[@data-value='grid'])[1]");
-
-	private By sortByOption = By.id("sorter");
+	private By productNameLinks = By.xpath("//strong[contains(@class,'product name')]/a[@class='product-item-link']");
+	private By productAddedConfirmMsg = By.xpath("//div[@class='messages']/div/div");
 
 	private By cartIcon = By.xpath("//a[contains(@class,'showcart')]");
-	private By counterNumberOnCart = By.xpath("//span[@class='counter-number']");
-	private By numberOfItemsInCart = By.xpath("//div[@class='items-total']//span[@class='count']");
-
+	private By numberOfItemsInCartText = By.xpath("//div[@class='items-total']//span[@class='count']");
 	private By proceedToCheckOutBtn = By.xpath("//button[@id='top-cart-btn-checkout']");
+	private By productNamesInCart = By.xpath("//ol[@id='mini-cart']//strong[@class='product-item-name']/a");
 
-	private By totalItems = By.xpath("//p[contains(text(),'  Items ')]//span[3]");
+	private String itemNumberFromToAndTotalList = "(//p[@id='toolbar-amount'])[1]//span";
+	private By pageNumberLinksList = By.xpath("(//div[@class='pages']//ul)[2]//span[2]");
+	private By itemsPerPageMenu = By.xpath("(//select[@id='limiter'])[2]");
+
+	private By itemsOnThePageList = By.xpath("//ol[@class='products list items product-items']//li");
 
 	public void goToCreateAnAccountLink() {
 
@@ -52,14 +63,14 @@ public class CommonPage extends BasePage {
 	public void signIn() {
 
 		driver.findElement(signInLink).click();
-		ReportUtils.log.info("selected on Sign In Link");
+		ReportUtils.log.info("added on Sign In Link");
 
 	}
 
 	public void goToUserHeadingBtn() {
 
 		driver.findElement(userHeadingBtn).click();
-		ReportUtils.log.info("selected on User Header Button");
+		ReportUtils.log.info("added on User Header Button");
 
 	}
 
@@ -70,31 +81,35 @@ public class CommonPage extends BasePage {
 
 	}
 
-	public void goToNavigationMenuItem(String menuItemName) {
+	public Actions moveToNavigationMenuItem(String menuItemName) {
+
 		By navigationMenu = By.xpath("//nav//li//span[text()='" + menuItemName + "']");
-
 		WebElement menuItemEle = driver.findElement(navigationMenu);
-
-		action.moveToElement(menuItemEle).perform();
-		ReportUtils.log.info("Moved To " + menuItemName + " Menu");
+		return action.moveToElement(menuItemEle);
 
 	}
 
-	public void selectMenuItem(String menuItemName) {
+	public CommonPage goToNavigationMenuItem(String menuItemName) {
 
-		By navigationMenu = By.xpath("//nav//li//span[text()='" + menuItemName + "']");
+		moveToNavigationMenuItem(menuItemName).perform();
+		ReportUtils.log.info("Moved To " + menuItemName + " Menu");
+		return this;
 
-		WebElement menuItemEle = driver.findElement(navigationMenu);
+	}
 
-		action.moveToElement(menuItemEle).click().perform();
+	public CommonPage selectNavigationMenuItem(String menuItemName) {
+
+		moveToNavigationMenuItem(menuItemName).click().perform();
 		ReportUtils.log.info("Clicked on " + menuItemName);
+		return this;
 
 	}
 
 	public void sortBy(String option) {
-		WebElement sortByEle = driver.findElement(sortByOption);
 
-		Select select = new Select(sortByEle);
+		WebElement sortByEle = driver.findElement(sortByMenu);
+
+		select = new Select(sortByEle);
 		select.selectByContainsVisibleText(option);
 
 		ReportUtils.log.info("Sorted Products by " + option);
@@ -102,123 +117,153 @@ public class CommonPage extends BasePage {
 	}
 
 	public void viewAs(String mode) {
+
 		By viewAsLink = By.xpath("(//div[@class='modes']//a[@title='" + mode + "'])[1]");
 		driver.findElement(viewAsLink).click();
 		ReportUtils.log.info("Switched to " + mode + " View");
-	}
-
-	public boolean isGridViewActive() {
-		String ele = driver.findElement(gridView).getDomAttribute("class");
-		if (ele.contains("active")) {
-			return true;
-		}
-		return false;
-	}
-	
-	List<WebElement> productNamesOnPage;
-	String selectedProductName;
-	HashMap<String, Integer> selectedProductsHashMap = new HashMap<>();
-	
-	public int numberOfProductsOnPage() {
-
-		By productNameLinks = By.xpath("//strong[contains(@class,'product name')]/a[@class='product-item-link']");
-		productNamesOnPage = driver.findElements(productNameLinks);
-		return productNamesOnPage.size();
 
 	}
 
-//	public int numberOfProductsOnPage(int pageNumber) {
+	public void selectShowItemsPerPage(int numberOfItemsToDisplayPerPage) {
+
+		WebElement itemsPerPageEle = driver.findElement(itemsPerPageMenu);
+
+		select = new Select(itemsPerPageEle);
+		select.selectByVisibleText(String.valueOf(numberOfItemsToDisplayPerPage));
+
+	}
+
+	public int getTotalItems() {
+
+		List<WebElement> fromItemToItemAndTotalItemNumbersList = driver
+				.findElements(By.xpath(itemNumberFromToAndTotalList));
+		int getTotalItems = Integer.parseInt(fromItemToItemAndTotalItemNumbersList.getLast().getText());
+
+		return getTotalItems;
+	}
+
+//	public int getTotalPages(int numberOfItemsToDisplayPerPage) {
 //
-//		By productNameLinks = By.xpath("//span[text()='" + pageNumber
-//				+ "']/parent:: strong/parent::li/parent::ul/parent::div[@class='pages']//parent::div//preceding-sibling::div//strong[contains(@class,'product name')]/a[@class='product-item-link']");
-//		productNamesOnPage = driver.findElements(productNameLinks);
-//		return productNamesOnPage.size();
+//		int totalPages;
 //
+//		int totalItems = getTotalItems();
+//		if (totalItems > numberOfItemsToDisplayPerPage) {
+//			totalPages = (totalItems + numberOfItemsToDisplayPerPage - 1) / numberOfItemsToDisplayPerPage;
+//			return totalPages;
+//		}
+//		return 0;
 //	}
+
+	public int getNumberOfItemsOnPage(int pageNumber, int numberOfItemsToDisplayPerPage) {
+
+		if (getTotalNumberOfPages(numberOfItemsToDisplayPerPage) > 0) {
+			goToPageNumber(pageNumber);
+		}
+
+		List<WebElement> itemsOnThePageEleList = driver.findElements(itemsOnThePageList);
+
+		return itemsOnThePageEleList.size();
+	}
+
+	public LinkedList<WebElement> productNamesEleLinkedList() {
+
+		List<WebElement> productNamesOnPageEle = driver.findElements(productNameLinks);
+		LinkedList<WebElement> productNamesEleLinkedList = new LinkedList<>(productNamesOnPageEle);
+
+		return productNamesEleLinkedList;
+	}
 
 	public boolean isProductNamesSortedOnPage() {
 
-		numberOfProductsOnPage();
+		LinkedList<String> productNamesLinkedList = new LinkedList<>();
 
-		ArrayList<String> productNamesArrayList = new ArrayList<>();
-		TreeSet<String> productNamesTreeSet = new TreeSet<>();
-
-		for (WebElement productNameEle : productNamesOnPage) {
+		for (WebElement productNameEle : productNamesEleLinkedList()) {
 			String productName = productNameEle.getText();
-			productNamesArrayList.add(productName); // add to ArrayList - follows insertion order as displayed on
-													// application page
-
-			productNamesTreeSet.add(productName); // add to TreeSet- sort product names in asc order
-
+			productNamesLinkedList.add(productName);
 		}
 
-		ArrayList<String> productNamesSortedArrayList = new ArrayList<>(productNamesTreeSet);
-		if (productNamesArrayList.equals(productNamesSortedArrayList)) {
-			return true;
+		TreeSet<String> productNamesTreeSet = new TreeSet<>(productNamesLinkedList);
+
+		Iterator<String> productNamesLinkedListIterator = productNamesLinkedList.iterator();
+		Iterator<String> treeSetiterator = productNamesTreeSet.iterator();
+
+		while (productNamesLinkedListIterator.hasNext() && (treeSetiterator.hasNext())) {
+			if (productNamesLinkedListIterator.next().equals(treeSetiterator.next())) {
+				return true;
+			}
 		}
 		return false;
 	}
-//		ArrayList<String> productNamesArrayList = new ArrayList<>();
-//		for (WebElement productNameEle : productNamesEle) {
-//			String productName=productNameEle.getText();
-//			productNamesArrayList.add(productName);  
-//		}
-//		TreeSet<String> productNamesTreeSet = new TreeSet<>(productNamesArrayList);
-//		Iterator<String> iterator = productNamesArrayList.iterator();
-//		Iterator<String> iteratorTreeSet = productNamesTreeSet.iterator();
-//
-//		while (iterator.hasNext() && (iteratorTreeSet.hasNext())) {
-//			if (iterator.next().equals(iteratorTreeSet.next())) {
-//				return true;
-//			}
-//
-//		}
-//		return false;
-//	}
-
-	public void scrollToProduct(int productNumber) {
-
-		WebElement selectedProductEle = productNamesOnPage.get(productNumber);
-
-		js.executeScript("arguments[0].scrollIntoView();", selectedProductEle);
-
-	}
-
-	LinkedList<String> selectedProductNameList = new LinkedList<>();
 
 	public void addProductToCart(int productNumber, String size, String color) {
 
-		selectedProductName = productNamesOnPage.get(productNumber).getText();
+		addedProductName = productNamesEleLinkedList().get(productNumber).getText();
 
-		String selectedProductDetails = "//a[contains(text(),'" + selectedProductName
+		String addedProductDetails = "//a[contains(text(),'" + addedProductName
 				+ "')]/parent :: strong//following-sibling :: div";
 
-		By selectColourLink = By.xpath(selectedProductDetails + "//div[@option-label='" + color + "']");
+		By selectColourLink = By.xpath(addedProductDetails + "//div[@option-label='" + color + "']");
 
-		By selectSizeLink = By.xpath(selectedProductDetails + "//div[text()='" + size + "']");
+		By selectSizeLink = By.xpath(addedProductDetails + "//div[text()='" + size + "']");
 
-		By addToCartButton = By.xpath(selectedProductDetails + "//button[@title='Add to Cart']");
+		By addToCartButton = By.xpath(addedProductDetails + "//button[@title='Add to Cart']");
 
 		driver.findElement(selectSizeLink).click();
 		driver.findElement(selectColourLink).click();
 		driver.findElement(addToCartButton).click();
-		ReportUtils.log.info("Added " + selectedProductName + " of " + size + " color " + color);
+		ReportUtils.log.info("Added " + addedProductName + " of " + size + " color " + color);
 
-		selectedProductNameList.add(selectedProductName);
+		addedProductNameList.add(addedProductName);
+
 	}
 
-	public boolean isCorrectProductAddedToCartMessageDisplayed() {
-		// String shoppingCartLinkText =
-		// driver.findElement(By.xpath("//div[@class='messages']//a")).getText();
-		By productAddedConfirmMsg = By.xpath("//div[@class='messages']/div/div");
+	public int getTotalItemsOnPage(int pageNumber, int numberOfItemsToDisplayPerPage) {
+
+		if (getTotalNumberOfPages(numberOfItemsToDisplayPerPage) > 0) {
+			goToPageNumber(pageNumber);
+
+			int totalItemsOnPage = Integer
+					.parseInt(driver.findElement(By.xpath(itemNumberFromToAndTotalList + "[2]")).getText())
+					- Integer.parseInt(driver.findElement(By.xpath(itemNumberFromToAndTotalList + "[1]")).getText())
+					+ 1;
+
+			return totalItemsOnPage;
+		}
+		return getTotalItems();
+	}
+
+	public void goToPageNumber(int pageNumber) {
+
+		driver.findElement(By.xpath("(//div[@class='pages']//ul)[2]//span[2][text()='" + pageNumber + "']")).click();
+		ReportUtils.log.info("Went to page: " + pageNumber);
+
+	}
+
+	public void scrollToProduct(int productNumber) {
+
+		WebElement addedProductEle = productNamesEleLinkedList().get(productNumber);
+
+		js.executeScript("arguments[0].scrollIntoView();", addedProductEle);
+
+	}
+
+	public int getTotalNumberOfPages(int numberOfItemsToDisplayPerPage) {
+
+		selectShowItemsPerPage(numberOfItemsToDisplayPerPage);
+
+		List<WebElement> totalPageNumberEle = driver.findElements(pageNumberLinksList);
+		return totalPageNumberEle.size() - 1;
+
+		// int totalPages=
+		// Integer.parseInt(driver.findElement(By.xpath("(//span[text()='Next'])[2]/parent::a//parent::li/preceding-sibling::li[1]//span[2]")).getText());
+		// return totalPages;
+	}
+
+	public String getProductAddedToCartConfirmMessage() {
 
 		String productAddedMsgEle = driver.findElement(productAddedConfirmMsg).getText();
-		// if (productAddedMsgEle.contains(" You added " + selectedProductName + " to
-		// your " + shoppingCartLinkText + ".")) {
-		if (productAddedMsgEle.contains(" You added " + selectedProductName + " to your ")) {
-			return true;
-		}
-		return false;
+		return productAddedMsgEle;
+
 	}
 
 	public void goToCart() {
@@ -228,22 +273,21 @@ public class CommonPage extends BasePage {
 
 	}
 
-	public int totalNumberOfProductsAddedInCart() {
+	public int getTotalNumberOfItemsAddedInCart() {
 
 		int numberOfProductsAddedInCart = 0;
 
-		for (String selectedProductName : selectedProductNameList) {
+		for (String addedItemName : addedProductNameList) {
 
-			Integer count = selectedProductsHashMap.get(selectedProductName);
-
-			if (count == null) {
-				selectedProductsHashMap.put(selectedProductName, 1);
+			Integer count = addedProductNamesHashMap.get(addedItemName);
+			if (count==null) {
+				addedProductNamesHashMap.put(addedItemName, 1);
 			} else {
-				selectedProductsHashMap.put(selectedProductName, count++);
+				addedProductNamesHashMap.put(addedItemName, ++count);
 			}
 		}
 
-		for (int value : selectedProductsHashMap.values()) {
+		for (int value : addedProductNamesHashMap.values()) {
 			numberOfProductsAddedInCart += value;
 		}
 
@@ -251,88 +295,58 @@ public class CommonPage extends BasePage {
 
 	}
 
-	public int totalNumberOfProductsInCart() {
-		int totalNumberOfItemsInCartText = Integer.parseInt(driver.findElement(numberOfItemsInCart).getText());
-		return totalNumberOfItemsInCartText;
-	}
+	public int getTotalOfItemsInCart() {
 
-	public int counterNumberOnCart() {
+		int totalOfItemsInCart = Integer.parseInt(driver.findElement(numberOfItemsInCartText).getText());
+		return totalOfItemsInCart;
 
-		int counterNumberOnCartText = Integer.parseInt(driver.findElement(counterNumberOnCart).getText());
-		return counterNumberOnCartText;
 	}
 
 	public boolean isProductNamesInCartCorrect() {
 
-		for (String getProductName : selectedProductsHashMap.keySet()) {
-			if (getProductName.equals(selectedProductName)) {
+		List<WebElement> productNamesInCartEleList = driver.findElements(productNamesInCart);
+		for (WebElement productNamesInCartEle : productNamesInCartEleList) {
+			productNamesInCartList.add(productNamesInCartEle.getText());
+		}
+
+		Iterator<String> addedProductNameListIterator = addedProductNameList.iterator();
+		Iterator<String> productNamesInCartListIterator = productNamesInCartList.reversed().iterator();
+
+		while (addedProductNameListIterator.hasNext() && productNamesInCartListIterator.hasNext()) {
+
+			if (addedProductNameListIterator.next().equals(productNamesInCartListIterator.next())) {
 				return true;
 			}
 		}
 		return false;
+
 	}
 
-	public boolean isQuantityOfTheSelectedProductInCartCorrect() {
+	public boolean isQuantityOfTheaddedProductInCartCorrect() {
 
-		for (String getProductName : selectedProductsHashMap.keySet()) {
+		for (String getProductName : addedProductNamesHashMap.keySet()) {
 
-			WebElement quantityofTheSelectedProductInCartTextEle = driver.findElement(By.xpath("//a[text()='"
+			WebElement quantityofTheaddedProductInCartTextEle = driver.findElement(By.xpath("//a[text()='"
 					+ getProductName
 					+ "']/parent::strong[@class='product-item-name']/following-sibling::div[2]//label[text()='Qty']/following-sibling :: input"));
 
-			int quantityOfTheSelectedProductInCart = Integer
-					.parseInt(quantityofTheSelectedProductInCartTextEle.getDomAttribute("data-item-qty"));
+			int quantityOfTheaddedProductInCart = Integer
+					.parseInt(quantityofTheaddedProductInCartTextEle.getDomAttribute("data-item-qty"));
 
-			int getQuantityOfTheProductInCart = selectedProductsHashMap.get(selectedProductName);
+			int getQuantityOfTheProductInCart = addedProductNamesHashMap.get(addedProductName);
 
-			if (getQuantityOfTheProductInCart == quantityOfTheSelectedProductInCart) {
+			if (getQuantityOfTheProductInCart == quantityOfTheaddedProductInCart) {
 				return true;
 			}
 		}
 		return false;
-
 	}
 
 	public void proceedToCheckOut() {
+
 		driver.findElement(proceedToCheckOutBtn).click();
 		ReportUtils.log.info("Proceeded to checkout");
 
 	}
 
-	public int totalItemsAvailable() {
-		int totalNumberOfItems = Integer.parseInt(driver.findElement(totalItems).getText());
-		return totalNumberOfItems;
-	}
-
-	public int totalItemsAvailableOnPage(int pageNumber) {
-		numberOfProductsOnPage();
-		int totalNumberOfItemsOnPage = Integer.parseInt(driver.findElement(By.xpath("//span[text()='" + pageNumber
-				+ "']/parent:: strong/parent::li/parent::ul/parent::div[@class='pages']//preceding-sibling::p[contains(text(),'  Items ')]//span[2]"))
-				.getText())
-				- Integer.parseInt(driver.findElement(By.xpath("//span[text()='" + pageNumber
-						+ "']/parent:: strong/parent::li/parent::ul/parent::div[@class='pages']//preceding-sibling::p[contains(text(),'  Items ')]//span[1]"))
-						.getText())
-				+ 1;
-//		int totalNumberOfItemsOnPage = Integer
-//				.parseInt(driver.findElement(By.xpath("//p[contains(text(),'  Items ')]//span[2]")).getText())
-//				- Integer.parseInt(driver.findElement(By.xpath("//p[contains(text(),'  Items ')]//span[1]")).getText())
-//				+ 1;
-		return totalNumberOfItemsOnPage;
-	}
-
-	public int totalNumberOfPages() {
-		List<WebElement> totalPageNumberEle = driver.findElements(By.xpath("(//div[@class='pages']//ul)[2]//span[2]"));
-		return totalPageNumberEle.size() - 1;
-
-		// int totalPages=
-		// Integer.parseInt(driver.findElement(By.xpath("//span[text()='Next'])[1]/parent::a//parent::li/preceding-sibling::li[1]//span[2]")).getText());
-		// return totalPages;
-	}
-
-	public void goToPageNumber(int pageNumber) {
-
-		driver.findElement(By.xpath("(//div[@class='pages']//ul)[2]//span[2][text()='" + pageNumber + "']")).click();
-		ReportUtils.log.info("Went to page: " + pageNumber);
-
-	}
 }

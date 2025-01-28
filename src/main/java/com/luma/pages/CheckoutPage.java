@@ -64,6 +64,7 @@ public class CheckoutPage extends CommonPage {
 	}
 
 	public void proceedToNext() {
+		
 		driver.findElement(nextButton).click();
 		ReportUtils.log.info("Proceeded Next");
 

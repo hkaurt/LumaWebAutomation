@@ -30,6 +30,7 @@ public class BaseUtils {
 		String path = System.getProperty("user.dir") + "/target/image_" + pageName + ".png";
 		FileUtils.copyFile(source, new File(path));
 		return path;
+		
 	}
 
 }

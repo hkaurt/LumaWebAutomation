@@ -3,14 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.luma.pagetests.PaginationFunctionalityTest">
+      <class name="com.luma.pagetests.TopsWomenPageCartTest">
         <methods>
-          <include name="verifyPaginationFunctionalityForBagsGearPage"/>
           <include name="init"/>
+          <include name="end"/>
           <include name="launchSite"/>
           <include name="tearDown"/>
+          <include name="verifyAddToCartAddsItemsCorrectly"/>
         </methods>
-      </class> <!-- com.luma.pagetests.PaginationFunctionalityTest -->
+      </class> <!-- com.luma.pagetests.TopsWomenPageCartTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

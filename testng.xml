@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-	<test thread-count="5" name="Test">
-		<classes>
-			<class
-				name="com.luma.pagetests.HoodiesSweatershirtTopsWomenPageSortByFunctionalityTest" />
-			<class name="com.luma.pagetests.PaginationFunctionalityTest" />
-			<class name="com.luma.pagetests.CreateNewCustomerAccountTest" />
-			<class name="com.luma.pagetests.BaseTest" />
-			<class
-				name="com.luma.pagetests.JacketsTopsWomenPageShoppingCartFunctionalityTest" />
-		</classes>
-	</test> <!--
-	Test -->
-</suite> <!--
-Suite -->
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="com.luma.pagetests.BagsGearPagePaginationTest"/>
+      <class name="com.luma.pagetests.TopsWomenPageSortByTest"/>
+      <class name="com.luma.pagetests.CreateNewCustomerAccountTest"/>
+      <class name="com.luma.pagetests.TopsWomenPageCartTest"/>
+      <class name="com.luma.pagetests.BaseTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
